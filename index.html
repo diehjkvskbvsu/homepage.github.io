@@ -23,6 +23,7 @@
             color: #fff;
             overflow-x: hidden;
             line-height: 2.2;
+            cursor: crosshair;
         }
 
         /* ========== 宇宙背景特效 ========== */
@@ -51,7 +52,7 @@
                 radial-gradient(ellipse 1600px 900px at 70% 30%, rgba(0, 60, 120, 0.35), transparent),
                 radial-gradient(ellipse 2400px 1400px at 85% 15%, rgba(40, 0, 90, 0.3), transparent),
                 radial-gradient(ellipse 1900px 1100px at 15% 85%, rgba(0, 40, 100, 0.32), transparent);
-            animation: nebulaDrift1 100s ease-in-out infinite;
+            transition: transform 0.3s ease-out;
         }
 
         /* 第二层：深色星云 */
@@ -67,7 +68,7 @@
                 radial-gradient(ellipse 1200px 700px at 40% 80%, rgba(80, 20, 100, 0.22), transparent),
                 radial-gradient(ellipse 2000px 1100px at 60% 20%, rgba(0, 50, 100, 0.18), transparent),
                 radial-gradient(ellipse 1400px 800px at 80% 45%, rgba(60, 0, 90, 0.2), transparent);
-            animation: nebulaDrift2 80s ease-in-out infinite reverse;
+            transition: transform 0.5s ease-out;
         }
 
         /* 第三层：极光效果 */
@@ -83,170 +84,66 @@
                     rgba(0, 150, 255, 0.03) 30%,
                     rgba(100, 0, 200, 0.02) 60%,
                     transparent 100%);
-            animation: auroraWave 15s ease-in-out infinite;
+            transition: opacity 0.3s;
         }
 
         /* 第四层：星星群 - 大星星 */
-        .stars-large {
+        .stars-layer {
             position: absolute;
             width: 300%;
             height: 300%;
             top: -100%;
             left: -100%;
-            background-image:
-                radial-gradient(3px 3px at 5% 10%, rgba(255,255,255,0.95), transparent),
-                radial-gradient(4px 4px at 15% 25%, rgba(255,255,255,0.9), transparent),
-                radial-gradient(3px 3px at 25% 5%, rgba(255,255,255,1), transparent),
-                radial-gradient(4px 4px at 35% 35%, rgba(255,255,255,0.85), transparent),
-                radial-gradient(3px 3px at 45% 15%, rgba(255,255,255,0.95), transparent),
-                radial-gradient(4px 4px at 55% 45%, rgba(255,255,255,0.9), transparent),
-                radial-gradient(3px 3px at 65% 8%, rgba(255,255,255,1), transparent),
-                radial-gradient(4px 4px at 75% 55%, rgba(255,255,255,0.88), transparent),
-                radial-gradient(3px 3px at 85% 28%, rgba(255,255,255,0.92), transparent),
-                radial-gradient(4px 4px at 95% 65%, rgba(255,255,255,0.95), transparent),
-                radial-gradient(3px 3px at 10% 75%, rgba(255,255,255,0.9), transparent),
-                radial-gradient(4px 4px at 20% 88%, rgba(255,255,255,0.85), transparent),
-                radial-gradient(3px 3px at 30% 92%, rgba(255,255,255,1), transparent),
-                radial-gradient(4px 4px at 40% 70%, rgba(255,255,255,0.92), transparent),
-                radial-gradient(3px 3px at 50% 82%, rgba(255,255,255,0.88), transparent),
-                radial-gradient(4px 4px at 60% 78%, rgba(255,255,255,0.95), transparent),
-                radial-gradient(3px 3px at 70% 95%, rgba(255,255,255,0.9), transparent),
-                radial-gradient(4px 4px at 80% 85%, rgba(255,255,255,1), transparent),
-                radial-gradient(3px 3px at 90% 92%, rgba(255,255,255,0.93), transparent),
-                radial-gradient(4px 4px at 12% 42%, rgba(255,255,255,0.87), transparent),
-                radial-gradient(3px 3px at 22% 58%, rgba(255,255,255,0.96), transparent),
-                radial-gradient(4px 4px at 38% 48%, rgba(255,255,255,0.89), transparent),
-                radial-gradient(3px 3px at 52% 38%, rgba(255,255,255,0.94), transparent),
-                radial-gradient(4px 4px at 68% 62%, rgba(255,255,255,0.91), transparent),
-                radial-gradient(3px 3px at 82% 72%, rgba(255,255,255,0.86), transparent);
-            background-size: 800px 800px;
-            animation: starsFloat1 300s linear infinite;
+            transition: transform 0.1s ease-out;
         }
 
-        /* 第五层：星星群 - 中星星 */
-        .stars-medium {
-            position: absolute;
-            width: 250%;
-            height: 250%;
-            top: -75%;
-            left: -75%;
-            background-image:
-                radial-gradient(2px 2px at 8% 18%, rgba(255,255,255,0.8), transparent),
-                radial-gradient(2px 2px at 18% 32%, rgba(255,255,255,0.75), transparent),
-                radial-gradient(2px 2px at 28% 12%, rgba(255,255,255,0.82), transparent),
-                radial-gradient(2px 2px at 38% 42%, rgba(255,255,255,0.78), transparent),
-                radial-gradient(2px 2px at 48% 22%, rgba(255,255,255,0.81), transparent),
-                radial-gradient(2px 2px at 58% 52%, rgba(255,255,255,0.76), transparent),
-                radial-gradient(2px 2px at 68% 16%, rgba(255,255,255,0.83), transparent),
-                radial-gradient(2px 2px at 78% 62%, rgba(255,255,255,0.79), transparent),
-                radial-gradient(2px 2px at 88% 38%, rgba(255,255,255,0.8), transparent),
-                radial-gradient(2px 2px at 92% 78%, rgba(255,255,255,0.77), transparent),
-                radial-gradient(2px 2px at 6% 68%, rgba(255,255,255,0.82), transparent),
-                radial-gradient(2px 2px at 16% 82%, rgba(255,255,255,0.75), transparent),
-                radial-gradient(2px 2px at 26% 88%, rgba(255,255,255,0.81), transparent),
-                radial-gradient(2px 2px at 36% 72%, rgba(255,255,255,0.78), transparent),
-                radial-gradient(2px 2px at 46% 92%, rgba(255,255,255,0.8), transparent),
-                radial-gradient(2px 2px at 56% 76%, rgba(255,255,255,0.76), transparent),
-                radial-gradient(2px 2px at 66% 86%, rgba(255,255,255,0.83), transparent),
-                radial-gradient(2px 2px at 76% 96%, rgba(255,255,255,0.79), transparent),
-                radial-gradient(2px 2px at 86% 66%, rgba(255,255,255,0.82), transparent),
-                radial-gradient(2px 2px at 96% 56%, rgba(255,255,255,0.77), transparent),
-                radial-gradient(2px 2px at 14% 46%, rgba(255,255,255,0.8), transparent),
-                radial-gradient(2px 2px at 24% 56%, rgba(255,255,255,0.78), transparent),
-                radial-gradient(2px 2px at 34% 36%, rgba(255,255,255,0.81), transparent),
-                radial-gradient(2px 2px at 44% 26%, rgba(255,255,255,0.76), transparent),
-                radial-gradient(2px 2px at 54% 16%, rgba(255,255,255,0.83), transparent);
-            background-size: 600px 600px;
-            animation: starsFloat2 200s linear infinite reverse;
+        /* 第五层：鼠标光晕 */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 150, 255, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 50;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
         }
 
-        /* 第六层：星星群 - 小星星 */
-        .stars-small {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background-image:
-                radial-gradient(1px 1px at 5% 15%, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.55), transparent),
-                radial-gradient(1px 1px at 25% 8%, rgba(255,255,255,0.62), transparent),
-                radial-gradient(1px 1px at 35% 35%, rgba(255,255,255,0.58), transparent),
-                radial-gradient(1px 1px at 45% 18%, rgba(255,255,255,0.61), transparent),
-                radial-gradient(1px 1px at 55% 45%, rgba(255,255,255,0.56), transparent),
-                radial-gradient(1px 1px at 65% 12%, rgba(255,255,255,0.63), transparent),
-                radial-gradient(1px 1px at 75% 55%, rgba(255,255,255,0.59), transparent),
-                radial-gradient(1px 1px at 85% 28%, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 95% 65%, rgba(255,255,255,0.57), transparent),
-                radial-gradient(1px 1px at 8% 75%, rgba(255,255,255,0.62), transparent),
-                radial-gradient(1px 1px at 18% 88%, rgba(255,255,255,0.55), transparent),
-                radial-gradient(1px 1px at 28% 92%, rgba(255,255,255,0.61), transparent),
-                radial-gradient(1px 1px at 38% 72%, rgba(255,255,255,0.58), transparent),
-                radial-gradient(1px 1px at 48% 82%, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 58% 68%, rgba(255,255,255,0.56), transparent),
-                radial-gradient(1px 1px at 68% 86%, rgba(255,255,255,0.63), transparent),
-                radial-gradient(1px 1px at 78% 78%, rgba(255,255,255,0.59), transparent),
-                radial-gradient(1px 1px at 88% 92%, rgba(255,255,255,0.62), transparent),
-                radial-gradient(1px 1px at 12% 52%, rgba(255,255,255,0.57), transparent),
-                radial-gradient(1px 1px at 22% 62%, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 32% 42%, rgba(255,255,255,0.61), transparent),
-                radial-gradient(1px 1px at 42% 32%, rgba(255,255,255,0.56), transparent),
-                radial-gradient(1px 1px at 52% 22%, rgba(255,255,255,0.63), transparent),
-                radial-gradient(1px 1px at 62% 48%, rgba(255,255,255,0.59), transparent),
-                radial-gradient(1px 1px at 72% 38%, rgba(255,255,255,0.55), transparent),
-                radial-gradient(1px 1px at 82% 58%, rgba(255,255,255,0.62), transparent),
-                radial-gradient(1px 1px at 92% 48%, rgba(255,255,255,0.58), transparent);
-            background-size: 500px 500px;
-            animation: starsFloat3 150s linear infinite;
+        /* 鼠标点击波纹 */
+        .ripple {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+            z-index: 1000;
+            animation: rippleExpand 0.8s ease-out forwards;
         }
 
-        /* 第七层：闪烁星星 */
-        .stars-twinkle {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background-image:
-                radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.9), transparent),
-                radial-gradient(3px 3px at 30% 40%, rgba(255,255,255,0.85), transparent),
-                radial-gradient(2px 2px at 50% 15%, rgba(255,255,255,0.92), transparent),
-                radial-gradient(2px 2px at 70% 60%, rgba(255,255,255,0.88), transparent),
-                radial-gradient(3px 3px at 90% 35%, rgba(255,255,255,0.91), transparent),
-                radial-gradient(2px 2px at 15% 75%, rgba(255,255,255,0.87), transparent),
-                radial-gradient(2px 2px at 40% 85%, rgba(255,255,255,0.9), transparent),
-                radial-gradient(3px 3px at 60% 70%, rgba(255,255,255,0.86), transparent),
-                radial-gradient(2px 2px at 80% 90%, rgba(255,255,255,0.93), transparent),
-                radial-gradient(2px 2px at 25% 55%, rgba(255,255,255,0.89), transparent),
-                radial-gradient(3px 3px at 45% 25%, rgba(255,255,255,0.92), transparent),
-                radial-gradient(2px 2px at 65% 45%, rgba(255,255,255,0.88), transparent),
-                radial-gradient(2px 2px at 85% 65%, rgba(255,255,255,0.91), transparent),
-                radial-gradient(3px 3px at 5% 85%, rgba(255,255,255,0.87), transparent),
-                radial-gradient(2px 2px at 20% 95%, rgba(255,255,255,0.9), transparent),
-                radial-gradient(2px 2px at 35% 5%, rgba(255,255,255,0.86), transparent),
-                radial-gradient(3px 3px at 55% 95%, rgba(255,255,255,0.93), transparent),
-                radial-gradient(2px 2px at 75% 15%, rgba(255,255,255,0.89), transparent),
-                radial-gradient(2px 2px at 95% 75%, rgba(255,255,255,0.92), transparent),
-                radial-gradient(3px 3px at 12% 35%, rgba(255,255,255,0.88), transparent);
-            background-size: 600px 600px;
-            animation: starsTwinkle 8s ease-in-out infinite, starsFloat1 400s linear infinite;
+        @keyframes rippleExpand {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(15);
+                opacity: 0;
+            }
         }
 
-        /* 流星层 */
-        .meteor {
-            position: absolute;
-            width: 2px;
-            height: 80px;
-            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
-            opacity: 0;
-            animation: meteorFall 10s linear infinite;
+        /* 鼠标拖尾 */
+        .trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100;
+            transition: opacity 0.5s;
         }
-
-        .meteor:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-        .meteor:nth-child(2) { left: 30%; top: 15%; animation-delay: 3s; }
-        .meteor:nth-child(3) { left: 50%; top: 25%; animation-delay: 6s; }
-        .meteor:nth-child(4) { left: 70%; top: 10%; animation-delay: 1.5s; }
-        .meteor:nth-child(5) { left: 85%; top: 30%; animation-delay: 4.5s; }
 
         /* 动态渐变叠加 */
         .gradient-overlay {
@@ -259,57 +156,6 @@
                 radial-gradient(ellipse at 20% 20%, rgba(0, 100, 200, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 80%, rgba(100, 0, 150, 0.12) 0%, transparent 50%),
                 radial-gradient(ellipse at 50% 50%, rgba(0, 50, 100, 0.1) 0%, transparent 60%);
-            animation: gradientPulse 20s ease-in-out infinite alternate;
-        }
-
-        /* 动画关键帧 */
-        @keyframes nebulaDrift1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(2%, 1%) scale(1.02); }
-            50% { transform: translate(1%, 2%) scale(1.05); }
-            75% { transform: translate(-1%, 1%) scale(1.03); }
-        }
-
-        @keyframes nebulaDrift2 {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-2%, 1%) rotate(2deg); }
-        }
-
-        @keyframes auroraWave {
-            0%, 100% { opacity: 0.8; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-5%); }
-        }
-
-        @keyframes starsFloat1 {
-            from { transform: translate(0, 0); }
-            to { transform: translate(-266px, -266px); }
-        }
-
-        @keyframes starsFloat2 {
-            from { transform: translate(0, 0); }
-            to { transform: translate(-200px, -200px); }
-        }
-
-        @keyframes starsFloat3 {
-            from { transform: translate(0, 0); }
-            to { transform: translate(-166px, -166px); }
-        }
-
-        @keyframes starsTwinkle {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-
-        @keyframes meteorFall {
-            0% { opacity: 0; transform: translateY(0) rotate(-45deg); }
-            10% { opacity: 1; }
-            30% { opacity: 0; transform: translateY(300px) rotate(-45deg); }
-            100% { opacity: 0; }
-        }
-
-        @keyframes gradientPulse {
-            0% { opacity: 0.8; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
         }
 
         /* ========== 导航 ========== */
@@ -331,6 +177,13 @@
             font-weight: 900;
             letter-spacing: 1em;
             text-transform: uppercase;
+            transition: letter-spacing 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            letter-spacing: 1.2em;
+            transform: scale(1.02);
         }
 
         .nav-links {
@@ -346,11 +199,28 @@
             letter-spacing: 0.15em;
             text-transform: uppercase;
             opacity: 0.7;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s;
         }
 
         .nav-links a:hover {
             opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
         }
 
         /* ========== 英雄区 ========== */
@@ -372,6 +242,11 @@
             color: rgba(255,255,255,0.4);
             text-transform: uppercase;
             margin-bottom: 48px;
+            transition: letter-spacing 0.5s;
+        }
+
+        .hero-subtitle:hover {
+            letter-spacing: 0.8em;
         }
 
         .hero-title {
@@ -380,6 +255,12 @@
             line-height: 1;
             letter-spacing: 0.1em;
             margin-bottom: 48px;
+            transition: transform 0.3s, letter-spacing 0.3s;
+        }
+
+        .hero-title:hover {
+            transform: scale(1.02);
+            letter-spacing: 0.15em;
         }
 
         .hero-tagline {
@@ -387,6 +268,12 @@
             font-weight: 200;
             color: rgba(255,255,255,0.5);
             letter-spacing: 0.1em;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .hero-tagline:hover {
+            color: rgba(255,255,255,0.8);
+            transform: scale(1.02);
         }
 
         /* ========== 区块 ========== */
@@ -402,6 +289,13 @@
             color: rgba(255,255,255,0.3);
             text-transform: uppercase;
             margin-bottom: 24px;
+            transition: letter-spacing 0.3s, color 0.3s;
+            cursor: default;
+        }
+
+        .section-label:hover {
+            letter-spacing: 0.7em;
+            color: rgba(255,255,255,0.6);
         }
 
         .section-title {
@@ -411,6 +305,12 @@
             margin-bottom: 64px;
             max-width: 1200px;
             letter-spacing: 0.02em;
+            transition: transform 0.3s;
+            cursor: default;
+        }
+
+        .section-title:hover {
+            transform: translateX(10px);
         }
 
         /* ========== 使命 ========== */
@@ -432,15 +332,38 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             text-decoration: none;
             color: #fff;
-            transition: all 0.4s;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             gap: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            transition: left 0.5s;
+        }
+
+        .mission-item:hover::before {
+            left: 100%;
         }
 
         .mission-item:hover {
             padding-left: 40px;
+            background: rgba(255,255,255,0.02);
         }
 
         .mission-item:hover .mission-name {
+            opacity: 1;
+            transform: translateX(10px);
+        }
+
+        .mission-item:hover .mission-number {
             opacity: 1;
         }
 
@@ -450,6 +373,8 @@
             letter-spacing: 0.2em;
             color: rgba(255,255,255,0.3);
             width: 80px;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0.5;
         }
 
         .mission-name {
@@ -457,7 +382,7 @@
             font-weight: 700;
             flex: 1;
             opacity: 0.7;
-            transition: opacity 0.3s;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             letter-spacing: 0.02em;
         }
 
@@ -466,6 +391,11 @@
             color: rgba(255,255,255,0.4);
             max-width: 400px;
             text-align: right;
+            transition: color 0.3s;
+        }
+
+        .mission-item:hover .mission-desc {
+            color: rgba(255,255,255,0.7);
         }
 
         /* ========== 数据 ========== */
@@ -481,6 +411,16 @@
 
         .stat {
             text-align: left;
+            transition: transform 0.3s;
+            cursor: pointer;
+            padding: 20px;
+            margin: -20px;
+            border-radius: 8px;
+        }
+
+        .stat:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.02);
         }
 
         .stat-value {
@@ -488,6 +428,11 @@
             font-weight: 900;
             line-height: 1;
             margin-bottom: 16px;
+            transition: transform 0.3s;
+        }
+
+        .stat:hover .stat-value {
+            transform: scale(1.05);
         }
 
         .stat-label {
@@ -495,6 +440,11 @@
             letter-spacing: 0.2em;
             color: rgba(255,255,255,0.4);
             text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .stat:hover .stat-label {
+            color: rgba(255,255,255,0.7);
         }
 
         /* ========== 历史 ========== */
@@ -514,18 +464,45 @@
             grid-template-columns: 200px 1fr;
             gap: 80px;
             align-items: baseline;
+            transition: transform 0.3s;
+            padding: 20px;
+            margin: -20px;
+            cursor: pointer;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(20px);
         }
 
         .timeline-year {
             font-size: 2rem;
             font-weight: 300;
             color: rgba(255,255,255,0.3);
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .timeline-item:hover .timeline-year {
+            color: rgba(255,255,255,0.6);
+            transform: scale(1.1);
+        }
+
+        .timeline-content {
+            transition: transform 0.3s;
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: translateX(10px);
         }
 
         .timeline-content h3 {
             font-size: clamp(1.5rem, 3vw, 2.5rem);
             font-weight: 700;
             margin-bottom: 16px;
+            transition: color 0.3s;
+        }
+
+        .timeline-item:hover .timeline-content h3 {
+            color: rgba(255,255,255,0.9);
         }
 
         .timeline-content p {
@@ -551,6 +528,13 @@
             font-weight: 900;
             margin-bottom: 64px;
             line-height: 1;
+            transition: transform 0.3s, color 0.3s;
+            cursor: default;
+        }
+
+        .cta-text:hover {
+            transform: scale(1.05);
+            color: rgba(255,255,255,0.8);
         }
 
         .cta-button {
@@ -563,12 +547,31 @@
             font-weight: 600;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
             background: #fff;
             color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255,255,255,0.2);
         }
 
         /* ========== 页脚 ========== */
@@ -589,6 +592,12 @@
             font-size: 1rem;
             font-weight: 900;
             letter-spacing: 0.5em;
+            cursor: pointer;
+            transition: letter-spacing 0.3s;
+        }
+
+        .footer-logo:hover {
+            letter-spacing: 0.8em;
         }
 
         .footer-text {
@@ -654,23 +663,17 @@
 </head>
 <body>
     <div class="cosmos">
-        <div class="nebula-layer-1"></div>
-        <div class="nebula-layer-2"></div>
-        <div class="aurora"></div>
-        <div class="stars-large"></div>
-        <div class="stars-medium"></div>
-        <div class="stars-small"></div>
-        <div class="stars-twinkle"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
+        <div class="nebula-layer-1" id="nebula1"></div>
+        <div class="nebula-layer-2" id="nebula2"></div>
+        <div class="aurora" id="aurora"></div>
+        <div class="stars-layer" id="stars"></div>
         <div class="gradient-overlay"></div>
     </div>
 
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <nav>
-        <div class="logo">NASA</div>
+        <div class="logo" id="logo">NASA</div>
         <div class="nav-links">
             <a href="#missions">Missions</a>
             <a href="#stats">Impact</a>
@@ -784,6 +787,210 @@
     </footer>
 
     <script>
+        // ========== 交互效果 ==========
+
+        // 鼠标光晕
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // 光晕跟随
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+        });
+
+        // 鼠标点击波纹
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 800);
+        });
+
+        // 鼠标拖尾
+        const trails = [];
+        const numTrails = 15;
+
+        for (let i = 0; i < numTrails; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'trail';
+            trail.style.opacity = (1 - i / numTrails) * 0.6;
+            trail.style.width = (8 - i * 0.4) + 'px';
+            trail.style.height = (8 - i * 0.4) + 'px';
+            document.body.appendChild(trail);
+            trails.push({ el: trail, x: 0, y: 0 });
+        }
+
+        let lastMouseX = 0, lastMouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            trails.forEach((trail, index) => {
+                const target = trails[index - 1] || { x: e.clientX, y: e.clientY };
+                trail.x += (target.x - trail.x) * (0.3 - index * 0.015);
+                trail.y += (target.y - trail.y) * (0.3 - index * 0.015);
+                trail.el.style.left = trail.x + 'px';
+                trail.el.style.top = trail.y + 'px';
+            });
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+        });
+
+        // 星云跟随鼠标
+        const nebula1 = document.getElementById('nebula1');
+        const nebula2 = document.getElementById('nebula2');
+        const aurora = document.getElementById('aurora');
+        const stars = document.getElementById('stars');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 30;
+            const y = (e.clientY / window.innerHeight - 0.5) * 30;
+            
+            nebula1.style.transform = `translate(${x}px, ${y}px)`;
+            
+            setTimeout(() => {
+                nebula2.style.transform = `translate(${-x * 0.8}px, ${-y * 0.8}px)`;
+            }, 50);
+            
+            aurora.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            
+            stars.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
+        });
+
+        // 鼠标滚轮加速效果
+        let scrollVelocity = 0;
+        window.addEventListener('wheel', (e) => {
+            scrollVelocity = e.deltaY * 0.1;
+            
+            const nebula1Transform = nebula1.style.transform || 'translate(0, 0)';
+            const nebula2Transform = nebula2.style.transform || 'translate(0, 0)';
+            
+            nebula1.style.filter = `brightness(${1 + Math.abs(scrollVelocity) * 0.01})`;
+            nebula2.style.filter = `brightness(${1 + Math.abs(scrollVelocity) * 0.01})`;
+        });
+
+        // 星星生成
+        function createStars() {
+            const starsContainer = stars;
+            starsContainer.innerHTML = '';
+            
+            // 大星星
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElement('div');
+                star.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 2 + 2}px;
+                    height: ${Math.random() * 2 + 2}px;
+                    background: rgba(255,255,255,${Math.random() * 0.3 + 0.6});
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: twinkle ${Math.random() * 3 + 2}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 3}s;
+                `;
+                starsContainer.appendChild(star);
+            }
+            
+            // 中星星
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 1.5 + 0.5}px;
+                    height: ${Math.random() * 1.5 + 0.5}px;
+                    background: rgba(255,255,255,${Math.random() * 0.3 + 0.4});
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: twinkle ${Math.random() * 4 + 3}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 4}s;
+                `;
+                starsContainer.appendChild(star);
+            }
+            
+            // 小星星
+            for (let i = 0; i < 40; i++) {
+                const star = document.createElement('div');
+                star.style.cssText = `
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    background: rgba(255,255,255,${Math.random() * 0.3 + 0.2});
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: twinkle ${Math.random() * 5 + 2}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 5}s;
+                `;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // 闪烁动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes twinkle {
+                0%, 100% { opacity: 0.5; }
+                50% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 悬停时的星星爆发效果
+        document.querySelectorAll('.mission-item, .stat, .timeline-item').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                for (let i = 0; i < 8; i++) {
+                    const particle = document.createElement('div');
+                    particle.style.cssText = `
+                        position: absolute;
+                        width: 3px;
+                        height: 3px;
+                        background: rgba(255,255,255,0.8);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 1000;
+                        animation: particleBurst 0.6s ease-out forwards;
+                    `;
+                    const rect = el.getBoundingClientRect();
+                    particle.style.left = rect.left + rect.width / 2 + 'px';
+                    particle.style.top = rect.top + rect.height / 2 + 'px';
+                    
+                    const angle = (i / 8) * Math.PI * 2;
+                    const distance = 50 + Math.random() * 30;
+                    particle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                    particle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+                    
+                    document.body.appendChild(particle);
+                    setTimeout(() => particle.remove(), 600);
+                }
+            });
+        });
+
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes particleBurst {
+                0% {
+                    transform: translate(0, 0) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(var(--tx), var(--ty)) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(particleStyle);
+
+        // 滚动动画
         const observerOptions = {
             threshold: 0.1
         };
@@ -804,6 +1011,7 @@
             observer.observe(el);
         });
 
+        // 数字动画
         const stats = document.querySelectorAll('.stat-value');
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -835,6 +1043,15 @@
             
             requestAnimationFrame(update);
         }
+
+        // 鼠标离开页面隐藏光晕
+        document.addEventListener('mouseleave', () => {
+            cursorGlow.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursorGlow.style.opacity = '1';
+        });
     </script>
 </body>
 </html>
