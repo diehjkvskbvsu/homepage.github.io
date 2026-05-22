@@ -36,30 +36,30 @@
             overflow: hidden;
         }
 
-        .nebula {
+        .cosmos::before {
+            content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background:
-                radial-gradient(ellipse 2500px 1500px at 10% 20%, rgba(0, 60, 150, 0.5), transparent),
-                radial-gradient(ellipse 2000px 1200px at 90% 80%, rgba(80, 0, 130, 0.4), transparent),
-                radial-gradient(ellipse 2200px 1300px at 50% 50%, rgba(0, 40, 120, 0.45), transparent),
-                radial-gradient(ellipse 1800px 1000px at 30% 70%, rgba(100, 0, 120, 0.35), transparent),
-                radial-gradient(ellipse 2400px 1400px at 70% 30%, rgba(0, 80, 160, 0.4), transparent),
-                radial-gradient(ellipse 1900px 1100px at 85% 15%, rgba(50, 0, 100, 0.38), transparent),
-                radial-gradient(ellipse 2100px 1200px at 15% 85%, rgba(0, 50, 130, 0.42), transparent);
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80') center center / cover no-repeat;
+            transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .stars {
+        .cosmos::after {
+            content: '';
             position: absolute;
-            width: 300%;
-            height: 300%;
-            top: -100%;
-            left: -100%;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.3) 0%,
+                rgba(0,0,0,0.5) 50%,
+                rgba(0,0,0,0.8) 100%
+            );
         }
 
         /* ========== 导航 ========== */
@@ -124,7 +124,7 @@
         .hero-subtitle {
             font-size: 0.7rem;
             letter-spacing: 0.6em;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.5);
             text-transform: uppercase;
             margin-bottom: 48px;
         }
@@ -145,7 +145,7 @@
         .hero-tagline {
             font-size: clamp(1.5rem, 4vw, 3rem);
             font-weight: 200;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.6);
             letter-spacing: 0.1em;
         }
 
@@ -154,12 +154,13 @@
             padding: 200px 80px;
             position: relative;
             z-index: 1;
+            background: rgba(0,0,0,0.85);
         }
 
         .section-label {
             font-size: 0.65rem;
             letter-spacing: 0.5em;
-            color: rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.4);
             text-transform: uppercase;
             margin-bottom: 24px;
         }
@@ -209,7 +210,7 @@
             font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.3);
             width: 80px;
         }
 
@@ -217,21 +218,21 @@
             font-size: clamp(2rem, 5vw, 5rem);
             font-weight: 700;
             flex: 1;
-            opacity: 0.6;
+            opacity: 0.7;
             transition: opacity 0.4s;
             letter-spacing: 0.02em;
         }
 
         .mission-desc {
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.5);
             max-width: 400px;
             text-align: right;
             transition: color 0.4s;
         }
 
         .mission-item:hover .mission-desc {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.8);
         }
 
         /* ========== 数据 ========== */
@@ -264,7 +265,7 @@
         .stat-label {
             font-size: 0.75rem;
             letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.5);
             text-transform: uppercase;
         }
 
@@ -297,12 +298,12 @@
         .timeline-year {
             font-size: 2rem;
             font-weight: 300;
-            color: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.3);
             transition: color 0.4s;
         }
 
         .timeline-item:hover .timeline-year {
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.6);
         }
 
         .timeline-content h3 {
@@ -313,12 +314,12 @@
         }
 
         .timeline-item:hover .timeline-content h3 {
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.95);
         }
 
         .timeline-content p {
             font-size: 1rem;
-            color: rgba(255,255,255,0.45);
+            color: rgba(255,255,255,0.6);
             line-height: 1.8;
             max-width: 600px;
         }
@@ -344,7 +345,7 @@
         .cta-button {
             display: inline-block;
             padding: 24px 80px;
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(255,255,255,0.3);
             color: #fff;
             text-decoration: none;
             font-size: 0.8rem;
@@ -366,6 +367,7 @@
             border-top: 1px solid rgba(255,255,255,0.08);
             position: relative;
             z-index: 1;
+            background: #000;
         }
 
         .footer-content {
@@ -387,7 +389,7 @@
 
         .footer-text {
             font-size: 0.7rem;
-            color: rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.4);
             letter-spacing: 0.1em;
         }
 
@@ -447,10 +449,7 @@
     </style>
 </head>
 <body>
-    <div class="cosmos">
-        <div class="nebula" id="nebula"></div>
-        <div class="stars" id="stars"></div>
-    </div>
+    <div class="cosmos" id="cosmos"></div>
 
     <nav>
         <div class="logo">NASA</div>
@@ -567,53 +566,14 @@
     </footer>
 
     <script>
-        // 生成星星
-        const stars = document.getElementById('stars');
-        const nebula = document.getElementById('nebula');
+        // 背景视差
+        const cosmos = document.getElementById('cosmos');
         
-        function createStars() {
-            let starHTML = '';
-            
-            // 大星星
-            for (let i = 0; i < 20; i++) {
-                const size = Math.random() * 2 + 2;
-                const opacity = Math.random() * 0.3 + 0.6;
-                starHTML += `<div style="
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    background: rgba(255,255,255,${opacity});
-                    border-radius: 50%;
-                    left: ${Math.random() * 100}%;
-                    top: ${Math.random() * 100}%;
-                "></div>`;
-            }
-            
-            // 小星星
-            for (let i = 0; i < 50; i++) {
-                starHTML += `<div style="
-                    position: absolute;
-                    width: 1px;
-                    height: 1px;
-                    background: rgba(255,255,255,${Math.random() * 0.3 + 0.2});
-                    border-radius: 50%;
-                    left: ${Math.random() * 100}%;
-                    top: ${Math.random() * 100}%;
-                "></div>`;
-            }
-            
-            stars.innerHTML = starHTML;
-        }
-
-        createStars();
-
-        // 星云视差
         document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 40;
-            const y = (e.clientY / window.innerHeight - 0.5) * 40;
+            const x = (e.clientX / window.innerWidth - 0.5) * 30;
+            const y = (e.clientY / window.innerHeight - 0.5) * 30;
             
-            nebula.style.transform = `translate(${x}px, ${y}px)`;
-            stars.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
+            cosmos.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
         });
 
         // 滚动动画
