@@ -1,180 +1,747 @@
-<!--
- * NASA - 极简太空探索
- * Last Update: 2026-05-22
- * Simple, Grand, Cosmic
--->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <title>NASA · 探索宇宙</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
-    <link rel="stylesheet" href="/mdui/css/mdui.min.css">
-    <link rel="stylesheet" href="/assets/css/space.css">
+    <title>NASA · Beyond</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* 动态粒子背景 */
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* 玻璃效果容器 */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+        }
+
+        /* 导航 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5em;
+            background: linear-gradient(135deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 英雄区 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 0.4em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 700;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .hero-title span {
+            display: block;
+        }
+
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.6);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 2.5rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .cta-button svg {
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* 滚动提示 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.5;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-indicator span {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+        }
+
+        /* 内容区 */
+        section {
+            padding: 8rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+        }
+
+        /* 任务卡片 */
+        .missions {
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.02), transparent);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .mission-card {
+            padding: 3rem;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mission-card:hover::before {
+            opacity: 1;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .mission-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .mission-desc {
+            color: rgba(255,255,255,0.5);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .mission-arrow {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+        }
+
+        .mission-card:hover .mission-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 统计数据 */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.1em;
+        }
+
+        /* 历史时间线 */
+        .history {
+            background: linear-gradient(180deg, transparent, rgba(118, 75, 162, 0.05), transparent);
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            gap: 4rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-year {
+            font-size: 4rem;
+            font-weight: 700;
+            opacity: 0.1;
+            flex-shrink: 0;
+            width: 200px;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year {
+            text-align: left;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        /* 页脚 */
+        footer {
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5em;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .footer-text {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            section {
+                padding: 5rem 2rem;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .timeline-year,
+            .timeline-item:nth-child(even) .timeline-year {
+                text-align: left;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: clamp(3rem, 12vw, 6rem);
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- 背景 -->
-    <div class="space-bg"></div>
-    <div class="stars"></div>
+    <canvas id="canvas"></canvas>
 
-    <!-- 加载动画 -->
-    <div class="loader">
-        <div class="loader-circle"></div>
-        <div class="loader-text">INITIALIZING</div>
-    </div>
+    <nav>
+        <div class="logo">NASA</div>
+        <div class="nav-links">
+            <a href="#missions">MISSIONS</a>
+            <a href="#stats">IMPACT</a>
+            <a href="#history">HISTORY</a>
+            <a href="https://www.nasa.gov" target="_blank">EXPLORE</a>
+        </div>
+    </nav>
 
-    <!-- 主内容 -->
-    <main class="hero">
-        <!-- 顶部标志 -->
-        <header class="header">
-            <div class="logo">NASA</div>
-            <nav class="nav">
-                <a href="#missions">MISSIONS</a>
-                <a href="#history">HISTORY</a>
-                <a href="#explore">EXPLORE</a>
-            </nav>
-        </header>
-
-        <!-- 宏大标题区 -->
-        <section class="hero-content">
-            <div class="hero-tagline">National Aeronautics and Space Administration</div>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">National Aeronautics and Space Administration</div>
             <h1 class="hero-title">
-                <span class="hero-line">TO THE</span>
-                <span class="hero-line hero-line-accent">MOON</span>
-                <span class="hero-line">AND BEYOND</span>
+                <span>BEYOND</span>
+                <span class="gradient-text">HORIZON</span>
             </h1>
-            <p class="hero-desc">探索宇宙的无限可能</p>
-            <div class="hero-cta">
-                <a href="https://www.nasa.gov" class="btn btn-primary" target="_blank">开始探索</a>
-            </div>
-        </section>
-
-        <!-- 滚动指示器 -->
+            <p class="hero-description">
+                探索未知，挑战极限。NASA 引领人类走向宇宙深处，
+                书写属于这个时代的太空传奇。
+            </p>
+            <a href="https://www.nasa.gov" target="_blank" class="cta-button">
+                开启探索之旅
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
         <div class="scroll-indicator">
-            <span>探索更多</span>
-            <div class="scroll-arrow"></div>
+            <span>向下探索</span>
+            <div class="scroll-line"></div>
         </div>
-    </main>
+    </section>
 
-    <!-- 任务区域 -->
-    <section id="missions" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">当前任务</h2>
-                <p class="section-subtitle">迈向人类的下一个巨大飞跃</p>
+    <section class="missions" id="missions">
+        <div class="section-header">
+            <div class="section-label">ACTIVE MISSIONS</div>
+            <h2 class="section-title">探索新世界</h2>
+        </div>
+        <div class="mission-grid">
+            <a href="https://www.nasa.gov/mission_pages/artemis/artemis.html" target="_blank" class="mission-card glass">
+                <div class="mission-icon">🌙</div>
+                <h3 class="mission-title">Artemis</h3>
+                <p class="mission-desc">重返月球表面，建立可持续的人类存在，为未来的火星任务奠定基础。</p>
+                <div class="mission-arrow">→</div>
+            </a>
+            <a href="https://www.nasa.gov/mission_pages/jameswb/main/index.html" target="_blank" class="mission-card glass">
+                <div class="mission-icon">🔭</div>
+                <h3 class="mission-title">James Webb</h3>
+                <p class="mission-desc">有史以来最强大的太空望远镜，窥探宇宙起源的秘密。</p>
+                <div class="mission-arrow">→</div>
+            </a>
+            <a href="https://mars.nasa.gov/mars2020/" target="_blank" class="mission-card glass">
+                <div class="mission-icon">🪐</div>
+                <h3 class="mission-title">Perseverance</h3>
+                <p class="mission-desc">在火星表面寻找古代微生物生命的证据，收集样本送回地球。</p>
+                <div class="mission-arrow">→</div>
+            </a>
+        </div>
+    </section>
+
+    <section id="stats">
+        <div class="section-header">
+            <div class="section-label">OUR IMPACT</div>
+            <h2 class="section-title">数字见证</h2>
+        </div>
+        <div class="stats">
+            <div class="stat-item glass">
+                <div class="stat-number">1958</div>
+                <div class="stat-label">NASA 成立</div>
             </div>
-            
-            <div class="missions-grid">
-                <a href="https://www.nasa.gov/mission_pages/artemis/artemis.html" class="mission-card" target="_blank">
-                    <div class="mission-icon">🌙</div>
-                    <h3 class="mission-title">Artemis</h3>
-                    <p class="mission-desc">重返月球计划，目标是在2025年前将第一位女性和下一位男性宇航员送上月球表面。</p>
-                </a>
-                
-                <a href="https://www.nasa.gov/mission_pages/jameswb/main/index.html" class="mission-card" target="_blank">
-                    <div class="mission-icon">🔭</div>
-                    <h3 class="mission-title">JWST</h3>
-                    <p class="mission-desc">詹姆斯·韦伯太空望远镜，探索宇宙最远处的星系和行星。</p>
-                </a>
-                
-                <a href="https://mars.nasa.gov/mars2020/" class="mission-card" target="_blank">
-                    <div class="mission-icon">🪐</div>
-                    <h3 class="mission-title">Perseverance</h3>
-                    <p class="mission-desc">毅力号火星车正在火星表面寻找生命迹象。</p>
-                </a>
+            <div class="stat-item glass">
+                <div class="stat-number">600+</div>
+                <div class="stat-label">次载人航天</div>
+            </div>
+            <div class="stat-item glass">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">年火星探索</div>
+            </div>
+            <div class="stat-item glass">
+                <div class="stat-number">12</div>
+                <div class="stat-label">位登月宇航员</div>
             </div>
         </div>
     </section>
 
-    <!-- 历史里程碑 -->
-    <section id="history" class="section section-dark">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">历史里程碑</h2>
-                <p class="section-subtitle">人类太空探索的伟大时刻</p>
-            </div>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">1958</div>
-                    <div class="timeline-content">
-                        <h4>NASA 成立</h4>
-                        <p>美国国家航空航天局正式成立</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-year">1969</div>
-                    <div class="timeline-content">
-                        <h4>阿波罗 11 号</h4>
-                        <p>人类首次登月，尼尔·阿姆斯特朗迈出历史性一步</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-year">1990</div>
-                    <div class="timeline-content">
-                        <h4>哈勃望远镜</h4>
-                        <p>哈勃太空望远镜发射升空，彻底改变了我们对宇宙的理解</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-year">2021</div>
-                    <div class="timeline-content">
-                        <h4>韦伯望远镜</h4>
-                        <p>有史以来最大、最强大的太空望远镜成功发射</p>
-                    </div>
-                </div>
-            </div>
+    <section class="history" id="history">
+        <div class="section-header">
+            <div class="section-label">MILESTONES</div>
+            <h2 class="section-title">历史时刻</h2>
         </div>
-    </section>
-
-    <!-- 数据统计 -->
-    <section id="explore" class="section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="stat-number" data-target="1958">0</div>
-                    <div class="stat-label">成立年份</div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">1958</div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass">
+                    <h3>NASA 启程</h3>
+                    <p>美国国家航空航天局正式成立，开启太空探索新时代。</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number" data-target="600">0</div>
-                    <div class="stat-label">次载人任务</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1969</div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass">
+                    <h3>月球漫步</h3>
+                    <p>阿波罗11号实现人类首次登月，「这是个人的一小步，人类的一大步」。</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number" data-target="50">0</div>
-                    <div class="stat-label">年火星探索</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1990</div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass">
+                    <h3>哈勃之眼</h3>
+                    <p>哈勃太空望远镜发射，揭示宇宙深处的奥秘。</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number" data-target="20000">0</div>
-                    <div class="stat-label">名员工</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2021</div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass">
+                    <h3>韦伯升空</h3>
+                    <p>詹姆斯·韦伯太空望远镜发射，开启宇宙观测新纪元。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-logo">NASA</div>
-                <div class="footer-links">
-                    <a href="https://www.nasa.gov" target="_blank">官网</a>
-                    <a href="https://twitter.com/nasa" target="_blank">Twitter</a>
-                    <a href="https://github.com/nasa" target="_blank">GitHub</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 NASA · 探索宇宙，追逐星辰</p>
-            </div>
-        </div>
+    <footer>
+        <div class="footer-logo">NASA</div>
+        <p class="footer-text">探索宇宙，追逐星辰 · 2026</p>
     </footer>
 
-    <script src="/assets/js/space.js"></script>
+    <script>
+        // 粒子动画
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+        const numParticles = 80;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            resize();
+            particles = [];
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        init();
+        animate();
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.mission-card, .stat-item, .timeline-item').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // 数字动画
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.textContent);
+                    animateValue(entry.target, 0, target, 2000);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => statsObserver.observe(stat));
+
+        function animateValue(element, start, end, duration) {
+            const range = end - start;
+            const startTime = performance.now();
+            
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(start + range * easeProgress);
+                element.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            
+            requestAnimationFrame(update);
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
