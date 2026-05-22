@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>群星观测局</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 2.2;
+        }
+
+        /* ========== 宇宙背景 ========== */
+        .cosmos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .cosmos::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80') center center / cover no-repeat;
+            transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .cosmos::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.1) 0%,
+                rgba(0,0,0,0.2) 40%,
+                rgba(0,0,0,0.5) 100%
+            );
+        }
+
+        /* ========== 导航 ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 48px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 1em;
+            text-transform: uppercase;
+            transition: letter-spacing 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .logo:hover {
+            letter-spacing: 1.3em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 64px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            transition: opacity 0.4s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* ========== 英雄区 ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 40px;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 0.6em;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            margin-bottom: 48px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 15vw, 20rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: 0.1em;
+            margin-bottom: 48px;
+            transition: letter-spacing 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-title:hover {
+            letter-spacing: 0.15em;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            font-weight: 200;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.1em;
+            max-width: 900px;
+        }
+
+        /* ========== 区块 ========== */
+        section {
+            padding: 200px 80px;
+            position: relative;
+            z-index: 1;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.5em;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 7vw, 7rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 64px;
+            max-width: 1200px;
+            letter-spacing: 0.02em;
+        }
+
+        /* ========== 组织概述 ========== */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 64px;
+            margin-top: 64px;
+        }
+
+        .overview-card {
+            padding: 48px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .overview-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            padding-left: 64px;
+        }
+
+        .overview-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .overview-card p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        /* ========== 使命与创始人 ========== */
+        .founder-section {
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .founder-content {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .founder-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+        }
+
+        .founder-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        /* ========== 流星体系 ========== */
+        .meteors-section {
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .meteors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            margin-top: 64px;
+        }
+
+        .meteor-card {
+            padding: 48px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .meteor-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .meteor-code {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 24px;
+        }
+
+        .meteor-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .meteor-desc {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        /* ========== 核心成员 ========== */
+        .members-section {
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .member-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .member-item {
+            display: grid;
+            grid-template-columns: 120px 1fr 400px;
+            gap: 48px;
+            align-items: start;
+            padding: 64px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .member-item:hover {
+            padding-left: 32px;
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .member-code {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .member-name {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 700;
+        }
+
+        .member-role {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 16px;
+        }
+
+        .member-desc {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        /* ========== 世界观层次 ========== */
+        .worldview-section {
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .worldview-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            max-width: 1000px;
+            margin-top: 64px;
+        }
+
+        .worldview-level {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 64px;
+            align-items: start;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 20px;
+            margin: -20px;
+        }
+
+        .worldview-level:hover {
+            transform: translateX(20px);
+        }
+
+        .level-number {
+            font-size: 3rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .level-content h3 {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            transition: color 0.4s;
+        }
+
+        .worldview-level:hover .level-content h3 {
+            color: rgba(255,255,255,0.95);
+        }
+
+        .level-content p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        /* ========== CTA ========== */
+        .cta-section {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .cta-text {
+            font-size: clamp(1.8rem, 5vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 64px;
+            line-height: 1;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 24px 80px;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s;
+        }
+
+        .cta-button:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* ========== 页脚 ========== */
+        footer {
+            padding: 80px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+            z-index: 1;
+            background: #000;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .footer-logo {
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 0.5em;
+            transition: letter-spacing 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .footer-logo:hover {
+            letter-spacing: 0.8em;
+        }
+
+        .footer-text {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.1em;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 1200px) {
+            .overview-grid, .meteors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .founder-content, .worldview-level, .member-item {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            nav {
+                padding: 32px 40px;
+            }
+
+            .nav-links {
+                gap: 40px;
+            }
+
+            section {
+                padding: 120px 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 80px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmos" id="cosmos"></div>
+
+    <nav>
+        <div class="logo">QXGZJ</div>
+        <div class="nav-links">
+            <a href="#overview">概述</a>
+            <a href="#founder">创始人</a>
+            <a href="#meteors">流星体系</a>
+            <a href="#members">核心成员</a>
+            <a href="#worldview">世界观</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-subtitle">基于《我不是戏神》原著的深度研究报告</div>
+        <h1 class="hero-title">群星观测局</h1>
+        <p class="hero-tagline">观测威胁各个世界的流星雨，跨烛光世界的神秘组织</p>
+    </section>
+
+    <section id="overview">
+        <div class="section-label">Overview</div>
+        <div class="section-title">什么是<br>群星观测局</div>
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3>超越单一世界</h3>
+                <p>存在于烛光世界之外，专门负责观测威胁各个世界的流星雨，对其进行分类、编号与研究。</p>
+            </div>
+            <div class="overview-card">
+                <h3>伏笔千里</h3>
+                <p>首次出现在第1881章的血色圣杯上，直到最终卷才通过林七夜之口完整揭示，属于全书最高层次的世界观设定。</p>
+            </div>
+            <div class="overview-card">
+                <h3>跨作品连接</h3>
+                <p>连接《我不是戏神》与《我在精神病院学斩神》等作品的桥梁，构建统一的共享世界观。</p>
+            </div>
+            <div class="overview-card">
+                <h3>神秘道具制造</h3>
+                <p>血色圣杯即为其产物之一，能够保存意识或气息，在全书完结时成为陈伶与同伴重聚的关键。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="founder-section" id="founder">
+        <div class="section-label">Founder</div>
+        <div class="section-title">初代戏子<br>无名</div>
+        <div class="founder-content">
+            <div class="founder-title">1号局长</div>
+            <div class="founder-desc">
+                群星观测局的创立者极有可能是初代戏子无名——即初代红王。他在完成重启世界的使命后升维到世界之外，当第一次看到世界之外那场"划过烛光万界的、浩荡的流星雨"时，意识到这些流星才是威胁所有烛光世界的根源性危险。<br><br>
+                他创立了群星观测局，对流星雨进行系统性的观测、编号与研究，并留下了两段关键记录：<br><br>
+                【解决赤星的方法，在赤星之上？】<br><br>
+                【下策：让星辰偏离既定轨道，与本世界错过，撞入隔壁的烛光世界<br>中策：寻找星辰弱点，用蛮力强制摧毁<br>上策：捕获，融合，取代】
+            </div>
+        </div>
+    </section>
+
+    <section class="meteors-section" id="meteors">
+        <div class="section-label">Meteor System</div>
+        <div class="section-title">流星雨<br>分类体系</div>
+        <div class="meteors-grid">
+            <div class="meteor-card">
+                <div class="meteor-code">G-SERIES</div>
+                <div class="meteor-name">纯粹毁灭</div>
+                <div class="meteor-desc">触碰烛光世界瞬间爆炸，将整个世界线炸成碎片。</div>
+            </div>
+            <div class="meteor-card">
+                <div class="meteor-code">J-SERIES</div>
+                <div class="meteor-name">思想侵蚀</div>
+                <div class="meteor-desc">影响所有生物的思想，让对应世界线陷入战乱，最终自我灭亡。</div>
+            </div>
+            <div class="meteor-card">
+                <div class="meteor-code">K-SERIES</div>
+                <div class="meteor-name">生命蚕食</div>
+                <div class="meteor-desc">以特殊生命形态一点点蚕食世界线直到彻底吞噬，神话入侵即为K系。</div>
+            </div>
+            <div class="meteor-card">
+                <div class="meteor-code">Y-SERIES</div>
+                <div class="meteor-name">文明击穿</div>
+                <div class="meteor-desc">不具备绝对破坏力，但能击穿文明本身，具备强烈自我意识，越是发达的文明越是容易被盯上，Y-012（赤星）即为代表。</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="members-section" id="members">
+        <div class="section-label">Core Members</div>
+        <div class="section-title">核心<br>成员</div>
+        <div class="member-list">
+            <div class="member-item">
+                <div class="member-code">1</div>
+                <div class="member-name">1号（初代戏子无名）</div>
+                <div class="member-desc">
+                    <div class="member-role">局长</div>
+                    升维存在；可在各烛光世界招引新人进入观测局；群星观测局的创立者。
+                </div>
+            </div>
+            <div class="member-item">
+                <div class="member-code">队长</div>
+                <div class="member-name">林七夜</div>
+                <div class="member-desc">
+                    <div class="member-role">夜幕小队队长</div>
+                    超越维度的极强战力，能治疗精神疾病，来自《斩神》世界。
+                </div>
+            </div>
+            <div class="member-item">
+                <div class="member-code">副队</div>
+                <div class="member-name">安卿鱼</div>
+                <div class="member-desc">
+                    <div class="member-role">夜幕小队副队长</div>
+                    对流星雨进行分类编号（如Y-012），建立完整的流星分类体系。
+                </div>
+            </div>
+            <div class="member-item">
+                <div class="member-code">成员</div>
+                <div class="member-name">沈青竹</div>
+                <div class="member-desc">
+                    <div class="member-role">夜幕小队队员</div>
+                    寂天使，来自其他烛光世界，曾救助陈伶。
+                </div>
+            </div>
+            <div class="member-item">
+                <div class="member-code">成员</div>
+                <div class="member-name">江洱</div>
+                <div class="member-desc">
+                    <div class="member-role">夜幕小队队员</div>
+                    灵魂能力特殊，能让灵魂以稳定形态持续存在。
+                </div>
+            </div>
+            <div class="member-item">
+                <div class="member-code">其他</div>
+                <div class="member-name">纪先生团队</div>
+                <div class="member-desc">
+                    <div class="member-role">夜幕小队并列团队</div>
+                    纪先生及其两名随行，与夜幕小队并列的升维强者。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="worldview-section" id="worldview">
+        <div class="section-label">Worldview</div>
+        <div class="section-title">世界观<br>层次</div>
+        <div class="worldview-timeline">
+            <div class="worldview-level">
+                <div class="level-number">01</div>
+                <div class="level-content">
+                    <h3>烛火</h3>
+                    <p>万物与世界的源头，世界的核心。</p>
+                </div>
+            </div>
+            <div class="worldview-level">
+                <div class="level-number">02</div>
+                <div class="level-content">
+                    <h3>烛光世界</h3>
+                    <p>从烛火中诞生的无数世界线，包括人类界域、灰界等。</p>
+                </div>
+            </div>
+            <div class="worldview-level">
+                <div class="level-number">03</div>
+                <div class="level-content">
+                    <h3>流星雨</h3>
+                    <p>烛光世界之外的威胁，包括G系、J系、K系、Y系等。</p>
+                </div>
+            </div>
+            <div class="worldview-level">
+                <div class="level-number">04</div>
+                <div class="level-content">
+                    <h3>群星观测局</h3>
+                    <p>跨世界的升维者联盟，处于烛光世界与流星雨之间的"缓冲地带"。</p>
+                </div>
+            </div>
+            <div class="worldview-level">
+                <div class="level-number">05</div>
+                <div class="level-content">
+                    <h3>观众</h3>
+                    <p>终极的叙事层，控制命运，第四面墙之外。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <p class="cta-text">好戏，开场</p>
+        <a href="https://wobushixishen.miraheze.org" target="_blank" class="cta-button">探索更多</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">QXGZJ</div>
+            <div class="footer-text">原著：三九音域 · 研究报告：2026年5月</div>
+        </div>
+    </footer>
+
+    <script>
+        // 背景视差
+        const cosmos = document.getElementById('cosmos');
+        
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 30;
+            const y = (e.clientY / window.innerHeight - 0.5) * 30;
+            
+            cosmos.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
+        });
+
+        // 滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.overview-card, .meteor-card, .member-item, .worldview-level').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.8s ease ${i * 0.12}s, transform 0.8s ease ${i * 0.12}s`;
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
