@@ -1,224 +1,347 @@
 #rin-main {
-    /*padding: 20px 25px;*/
     padding: 20px 0;
     height: auto;
     display: flex;
     width: 95%;
     margin: auto;
-    /*height: 100vh;*/
-    /*max-width: 1200px;*/
-    /*max-width: 90%;*/
     justify-content: center;
     flex-flow: column nowrap;
+    position: relative;
+    z-index: 10;
+}
+
+.rin-logo {
+    position: relative;
+    display: inline-block;
 }
 
 .rin-logo img {
-    border-radius: 15px;
-    max-width: 220px;
+    border-radius: 50%;
+    max-width: 180px;
     padding-bottom: 10px;
     width: 95%;
+    border: 3px solid rgba(0,87,231,0.5);
+    box-shadow: 0 0 30px rgba(0,87,231,0.3);
+    animation: float 6s ease-in-out infinite, fadeInUp 1s ease;
+    transition: all 0.5s ease;
+}
+
+.rin-logo img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 50px rgba(0,87,231,0.6);
 }
 
 .rin-left {
-    padding: 20px 25px;
+    padding: 30px 25px;
     text-align: center;
     margin: 0 auto;
+    animation: slideInLeft 1s ease;
 }
 
 .rin-left-title {
-    font-size: 25px;
-    color: white;
-    padding-bottom: 2px;
+    font-size: 32px;
+    color: #ffffff;
+    padding-bottom: 5px;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    text-shadow: 0 0 20px rgba(0,87,231,0.8);
+    animation: fadeInUp 1.2s ease;
 }
 
 .rin-left-title2 {
-    font-size: 15px;
-    color: white;
-    margin-bottom: 8px;
+    font-size: 18px;
+    color: #0057e7;
+    margin-bottom: 15px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 4px;
+    animation: fadeInUp 1.4s ease;
 }
 
 .rin-left-slogan {
-    font-size: 13px;
-    color: white;
-    padding-bottom: 2px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    padding-bottom: 15px;
+    font-style: italic;
+    animation: fadeInUp 1.6s ease;
+    letter-spacing: 2px;
 }
+
 .rin-btn-left {
     width:100%;
-    margin-top: 5px;
+    margin-top: 8px;
+    transition: all 0.3s ease;
 }
 
-/*@media (max-height: 777px) {*/
-/*    #rin-main {*/
-/*        height: auto;*/
-/*        padding: 20px 0;*/
-/*    }*/
-
-/*}*/
+.rin-btn-left:hover {
+    transform: translateX(10px);
+    box-shadow: 0 0 20px rgba(0,87,231,0.5);
+}
 
 .rin-card {
-    /*margin: 20px 0;*/
-    padding: 20px 25px;
-    /*padding-bottom:0;*/
-    background-color: rgba(66, 66, 66, .3);
+    padding: 30px 35px;
+    background: rgba(0,20,50,0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,87,231,0.2);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    animation: fadeInUp 1s ease;
+    transition: all 0.5s ease;
+}
+
+.rin-card:hover {
+    box-shadow: 0 12px 48px rgba(0,87,231,0.2);
+    border-color: rgba(0,87,231,0.4);
 }
 
 .rin-card-title {
     font-size: 30px;
-    color: white;
-    margin-bottom: 15px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
 }
 
 .rin-card-title2 {
-    font-size: 20px;
-    color: white;
-    margin-bottom: 5px;
+    font-size: 24px;
+    color: #0057e7;
+    margin-bottom: 15px;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(0,87,231,0.5);
 }
 
 .rin-card-content {
-    font-size: 17px;
-    color: white;
-    margin-bottom: 5px;
-    line-height: 1.5;
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 10px;
+    line-height: 1.8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .rin-card-title2 a {
     text-decoration: none;
+    color: #0057e7;
+    transition: all 0.3s ease;
+}
+
+.rin-card-title2 a:hover {
+    color: #0099ff;
+    text-shadow: 0 0 15px rgba(0,153,255,0.8);
 }
 
 .rin-card-part {
-    margin-bottom: 15px;
-    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-top: 15px;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
 }
 
+.rin-card-part:nth-child(1) { animation-delay: 0.2s; }
+.rin-card-part:nth-child(2) { animation-delay: 0.4s; }
+.rin-card-part:nth-child(3) { animation-delay: 0.6s; }
+.rin-card-part:nth-child(4) { animation-delay: 0.8s; }
+.rin-card-part:nth-child(5) { animation-delay: 1s; }
+
 .mdui-progress {
-    background-color: rgba(255, 255, 255, .2) !important;
-    height: 6px;
-    border-radius: 3px;
+    background-color: rgba(0,87,231,0.2) !important;
+    height: 8px;
+    border-radius: 4px;
     width: 90%;
+    overflow: hidden;
 }
 
 .mdui-progress-determinate {
-    background-color: rgb(255, 255, 255) !important;
-    border-radius: 3px;
+    background: linear-gradient(90deg, #0057e7, #0099ff, #0057e7) !important;
+    background-size: 200% 100%;
+    animation: progressGlow 3s ease infinite;
+    border-radius: 4px;
+    transition: width 1s ease;
+}
 
+@keyframes progressGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .rin-progress-title {
-    color: white;
-    padding-bottom: 6px;
-    padding-top: 10px;
+    color: #ffffff;
+    padding-bottom: 8px;
+    padding-top: 12px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.rin-progress-title:hover {
+    color: #0099ff;
+    text-shadow: 0 0 10px rgba(0,153,255,0.5);
 }
 
 .mdui-tooltip {
-    margin-top: 20px !important;
+    margin-top: 25px !important;
 }
 
 .rin-btn {
-    color: white;
-    margin-right: 10px;
-    min-width: 100px !important;
+    color: #ffffff;
+    margin-right: 12px;
+    margin-bottom: 10px;
+    min-width: 120px !important;
+    background: linear-gradient(135deg, rgba(0,87,231,0.8), rgba(0,150,255,0.8)) !important;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,87,231,0.3);
+    transition: all 0.3s ease;
+}
+
+.rin-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,87,231,0.5);
 }
 
 @media only screen and (min-width: 420px) and (max-width: 1024px) {
     .rin-left-title {
-        font-size: 35px!important;
+        font-size: 42px !important;
+        letter-spacing: 12px;
     }
     .rin-left-title2 {
-        font-size: 25px!important;
+        font-size: 28px !important;
     }
     .rin-left-slogan {
-        font-size: 20px!important;
+        font-size: 22px !important;
     }
 }
 
 @media only screen and (max-width: 1024px) {
     .rin-btn {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
     .rin-logo img {
-        display:none;
+        display:block;
+        margin: 0 auto;
     }
     .rin-left-title {
-        font-size: 30px;
+        font-size: 36px;
+        letter-spacing: 8px;
     }
     .rin-left-title2 {
-        font-size: 20px;
+        font-size: 24px;
     }
     .rin-left-slogan {
-        font-size: 15px;
+        font-size: 16px;
     }
     .rin-btn-left {
         width:auto;
-        /*margin-top: 5px;*/
+    }
+    .rin-card {
+        padding: 20px 20px;
     }
 }
 
 .rin-btn-blue {
-    border-bottom: 1.5px solid #28A9E0;
+    background: linear-gradient(135deg, rgba(0,87,231,0.8), rgba(0,120,200,0.8)) !important;
+    border-bottom: 3px solid #0057e7;
 }
 
 .rin-btn-blue:hover {
-    background-color: #28A9E0;
-    transition: all .3s;
+    background: linear-gradient(135deg, rgba(0,120,200,0.9), rgba(0,150,255,0.9)) !important;
+    border-bottom-color: #0099ff;
+    box-shadow: 0 6px 20px rgba(0,150,255,0.4);
 }
 
 .rin-btn-pink {
-    border-bottom: 1.5px solid #F9A2A8;
+    border-bottom: 3px solid #ff4081;
+    background: linear-gradient(135deg, rgba(255,64,129,0.8), rgba(200,50,100,0.8)) !important;
 }
 
 .rin-btn-pink:hover {
-    background-color: #F9A2A8;
-    transition: all .3s;
+    background: linear-gradient(135deg, rgba(255,80,140,0.9), rgba(220,60,110,0.9)) !important;
+    box-shadow: 0 6px 20px rgba(255,64,129,0.4);
 }
 
 .rin-btn-black {
-    border-bottom: 1.5px solid #353535;
+    background: linear-gradient(135deg, rgba(30,30,30,0.9), rgba(50,50,50,0.9)) !important;
+    border-bottom: 3px solid #404040;
 }
 
 .rin-btn-black:hover {
-    background-color: #353535;
-    transition: all .3s;
+    background: linear-gradient(135deg, rgba(50,50,50,0.9), rgba(70,70,70,0.9)) !important;
+    box-shadow: 0 6px 20px rgba(100,100,100,0.3);
 }
 
 .rin-btn-white {
-    border-bottom: 1.5px solid white;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(200,200,200,0.9)) !important;
+    color: #000;
+    border-bottom: 3px solid #cccccc;
 }
 
 .rin-btn-white:hover {
-    background-color: white;
-    color: black;
-    transition: all .3s;
+    background: linear-gradient(135deg, rgba(255,255,255,1), rgba(220,220,220,1)) !important;
+    color: #000;
+    box-shadow: 0 6px 20px rgba(255,255,255,0.3);
 }
 
 .rin-tr {
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
 
-.rin-card-article{
-    padding:15px;
-    /*margin-bottom: 10px;*/
+.rin-card-article {
+    padding: 20px;
+    background: rgba(0,30,60,0.5);
+    border-left: 3px solid #0057e7;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: all 0.4s ease;
+    cursor: pointer;
 }
-.rin-article-title{
-    color: white;
+
+.rin-card-article:hover {
+    background: rgba(0,50,90,0.6);
+    transform: translateX(10px);
+    border-left-color: #0099ff;
+    box-shadow: 0 4px 20px rgba(0,87,231,0.3);
+}
+
+.rin-article-title {
+    color: #ffffff;
     font-size: 18px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 8px;
 }
-.rin-article-content{
-    padding-top:10px;
-    color: white;
+
+.rin-article-content {
+    padding-top: 8px;
+    color: rgba(255,255,255,0.8);
     font-size: 14px;
+    line-height: 1.6;
 }
-#works a{
-    text-decoration:none;
+
+#works a, #article a {
+    text-decoration: none;
+    display: block;
 }
-#article a{
-    text-decoration:none;
+
+.rin-article-more {
+    text-decoration: none;
+    color: #0057e7;
+    font-size: 14px;
+    margin-left: 10px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 10px;
 }
-.rin-article-more{
-    text-decoration:none;
-    color: white;
-    font-size: 13px;
-    margin-left: 5px;
+
+.rin-article-more:hover {
+    color: #0099ff;
+    text-shadow: 0 0 10px rgba(0,153,255,0.5);
+    transform: translateX(5px);
 }
 
 #last {
@@ -226,14 +349,16 @@
 }
 
 #last .rin-card-title2 {
-    letter-spacing: 10px;
-    margin-bottom: 10px;
+    letter-spacing: 12px;
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 #last .rin-card-content {
-    font-size: 12px;
-    letter-spacing: 1em;
-    opacity: .5;
+    font-size: 14px;
+    letter-spacing: 3px;
+    opacity: 0.6;
+    color: rgba(255,255,255,0.7);
 }
 
 #footer {
@@ -242,12 +367,109 @@
 
 #footer .rin-card-content {
     font-size: 12px;
-    opacity: .5;
+    opacity: 0.5;
+    color: rgba(255,255,255,0.6);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
 }
 
 #footer div a {
-    color: #2196f3;
+    color: #0057e7;
     font-weight: 700;
     transition: all .3s;
     text-decoration: none;
+}
+
+#footer div a:hover {
+    color: #0099ff;
+    text-shadow: 0 0 10px #0099ff;
+}
+
+.orbit-animation {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+}
+
+.orbit-center {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #0057e7;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px #0057e7;
+}
+
+.orbit-satellite {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #0099ff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    margin-left: -5px;
+    margin-top: -5px;
+    animation: orbit 8s linear infinite;
+    box-shadow: 0 0 10px #0099ff;
+}
+
+.stat-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
+    background: rgba(0,87,231,0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(0,87,231,0.3);
+    min-width: 150px;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,87,231,0.3);
+}
+
+.stat-number {
+    font-size: 36px;
+    color: #0057e7;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nasa-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    background: linear-gradient(135deg, #0057e7, #003399);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.nasa-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0,87,231,0.5);
 }
