@@ -1,292 +1,180 @@
 <!--
- * NASA Space Explorer - Personal Homepage
+ * NASA - 极简太空探索
  * Last Update: 2026-05-22
- * Exploring the Universe
+ * Simple, Grand, Cosmic
 -->
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title>NASA Space Explorer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="NASA Space Explorer - Your Gateway to the Universe">
-    <meta name="theme-color" content="#0057e7">
+    <title>NASA · 探索宇宙</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
     <link rel="stylesheet" href="/mdui/css/mdui.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="stylesheet" href="/assets/css/index.css">
-    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1625701_q2422cy34wn.css">
-    <link rel="icon" href="/assets/img/logo-circul-100.png">
-    <script>
-        console.log("%c🚀 NASA Space Explorer Initialized", "color: #0057e7; font-size: 16px;");
-    </script>
+    <link rel="stylesheet" href="/assets/css/space.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="mdui-theme-primary-blue mdui-theme-accent-blue">
-<div class="loading-overlay">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">INITIALIZING...</div>
-</div>
+<body>
+    <!-- 背景 -->
+    <div class="space-bg"></div>
+    <div class="stars"></div>
 
-<div id="rin-bg"></div>
-<div class="nebula-effect"></div>
-<!-- <div class="scanline"></div> -->
-
-<main id="rin-main">
-    <div class="mdui-row">
-        <div class="mdui-col-xs-12 mdui-col-md-2">
-            <div class="rin-left">
-                <div class="rin-logo">
-                    <div class="orbit-animation">
-                        <div class="orbit-center"></div>
-                        <div class="orbit-satellite"></div>
-                    </div>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1200px-NASA_logo.svg.png" alt="NASA Logo">
-                </div>
-                <div class="rin-left-title">NASA</div>
-                <div class="rin-left-title2">Space Explorer</div>
-                <div class="rin-left-slogan">「探索宇宙，追逐星辰」</div>
-
-                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="https://www.nasa.gov/" target="_blank"><span class="iconfont iconBlog"></span> Official</a>
-
-                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="https://www.nasa.gov/mission_pages/hubble/hubble_story.html" target="_blank"><span class="iconfont iconwiki"></span> Missions</a>
-
-                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="https://apod.nasa.gov/apod/astropicks.html" target="_blank"><span class="iconfont iconrizhi"></span> APOD</a>
-
-                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="https://www.nasa.gov/images/" target="_blank"><span class="iconfont iconfriend"></span> Gallery</a>
-
-                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="https://www.nasa.gov/audience/forstudents/index.html" target="_blank"><span class="iconfont iconCommentenable"></span> Education</a>
-
-                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="https://www.nasa.gov/about/index.html" target="_blank"><span class="iconfont iconabout"></span> About</a>
-            </div>
-        </div>
-        <div class="mdui-col-xs-12 mdui-col-md-10">
-            <div class="mdui-card rin-card">
-                <div class="rin-card-part" id="introduce" style="margin-top: 0;">
-                    <div class="rin-card-content mdui-typo">
-                        <h2 style="color: #0057e7; margin-bottom: 15px; font-family: 'Courier New', monospace;">🌌 WELCOME TO NASA</h2>
-                        <p>美国国家航空航天局（NASA）是美国联邦政府的一个行政机构，负责民用太空计划，以及航空和航天研究。</p>
-                        <p>探索宇宙的奥秘，了解行星、恒星和星系的奥秘。<a href="https://www.nasa.gov/" target="_blank" style="color: #0057e7;">访问 NASA 官网</a></p>
-                        <p style="color: #0099ff;">Your Gateway to the Universe!</p>
-                        <div style="margin-top: 15px;">
-                            <span class="nasa-badge">🚀 太空探索</span>
-                            <span class="nasa-badge">🛸 外星生命</span>
-                            <span class="nasa-badge">🌟 恒星研究</span>
-                            <span class="nasa-badge">🪐 行星科学</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rin-card-part" id="stats">
-                    <div class="rin-card-title2 mdui-typo"><a href="#stats">#</a> NASA 里程碑</div>
-                    <div class="stat-container">
-                        <div class="stat-item">
-                            <div class="stat-number">1958</div>
-                            <div class="stat-label">成立年份</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">600+</div>
-                            <div class="stat-label">载人任务</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">年探索火星</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">20,000+</div>
-                            <div class="stat-label">员工数量</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rin-card-part" id="fighting">
-                    <div class="rin-card-title2 mdui-typo"><a href="#fighting">#</a> 探索领域</div>
-                    <div class="mdui-container">
-                        <div class="mdui-row">
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4"
-                                 mdui-tooltip="{content: '月球、火星及更远的地方'}">
-                                <div class="rin-progress-title">
-                                    🚀 深空探索
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 95%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4"
-                                 mdui-tooltip="{content: 'ISS 国际空间站运营'}">
-                                <div class="rin-progress-title">
-                                    🛡️ 空间站运营
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 90%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4"
-                                 mdui-tooltip="{content: '地球观测和气候变化研究'}">
-                                <div class="rin-progress-title">
-                                    🌍 地球科学
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 85%;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mdui-row">
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4" mdui-tooltip="{content: '先进推进系统和火箭技术'}">
-                                <div class="rin-progress-title">
-                                    🔬 航空研究
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 88%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4"
-                                 mdui-tooltip="{content: '詹姆斯·韦伯太空望远镜'}">
-                                <div class="rin-progress-title">
-                                    🔭 天体物理学
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 92%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4"
-                                 mdui-tooltip="{content: '火星探测器、月球计划'}">
-                                <div class="rin-progress-title">
-                                    🪐 行星探索
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 87%;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mdui-row">
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4"
-                                 mdui-tooltip="{content: '太空技术、创新和商业化'}">
-                                <div class="rin-progress-title">
-                                    💡 技术创新
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 80%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4"
-                                 mdui-tooltip="{content: 'STEM 教育和公众参与'}">
-                                <div class="rin-progress-title">
-                                    📚 教育推广
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 75%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4"
-                                 mdui-tooltip="{content: '保障宇航员安全'}">
-                                <div class="rin-progress-title">
-                                    👨‍🚀 人类航天
-                                </div>
-                                <div class="mdui-progress">
-                                    <div class="mdui-progress-determinate" style="width: 93%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rin-card-part" id="contact">
-                    <div class="rin-card-title2 mdui-typo"><a href="#contact">#</a> 官方频道</div>
-
-                    <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue mdui-text-capitalize"
-                       href="https://twitter.com/NASA" target="_blank"><span
-                            class="iconfont icontwitter-fill"></span> Twitter</a>
-
-                    <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue mdui-text-capitalize"
-                       href="https://www.instagram.com/nasa/" target="_blank"><span class="iconfont icontelegram"></span> Instagram</a>
-
-                    <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-black mdui-text-capitalize" href="https://github.com/nasa" target="_blank"><span class="iconfont icongithub"></span> GitHub</a>
-
-                    <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue mdui-text-capitalize"
-                       href="https://www.nasa.gov/about/contact/index.html" target="_blank"><span
-                            class="iconfont iconmail_fill"></span> Contact</a>
-
-                </div>
-
-                <div class="rin-card-part" id="article">
-                    <div class="rin-card-title2 mdui-typo"><a href="#article">#</a> 最新任务</div>
-
-                    <a target="_blank" href="https://www.nasa.gov/mission_pages/artemis/artemis.html">
-                    <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 10px;">
-                        <div class="rin-article-title">🚀 阿耳忒弥斯计划 (Artemis)</div>
-                        <div class="rin-article-content">NASA的重返月球计划，目标是在2025年前将第一位女性和下一位男性宇航员送上月球，并为未来的火星任务奠定基础。</div>
-                    </div>
-                    </a>
-
-                    <a target="_blank" href="https://www.nasa.gov/mission_pages/jameswb/main/index.html">
-                        <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 5px;">
-                            <div class="rin-article-title">🔭 詹姆斯·韦伯太空望远镜 (JWST)</div>
-                            <div class="rin-article-content">有史以来最大、最强大的太空望远镜，正在探索宇宙的最远处，揭示星系形成和系外行星的奥秘。</div>
-                        </div>
-                    </a>
-                    
-                    <a target="_blank" href="https://mars.nasa.gov/mars2020/">
-                        <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 5px;">
-                            <div class="rin-article-title">🪐 火星2020任务</div>
-                            <div class="rin-article-content">毅力号火星车正在火星表面探索，收集岩石样本，寻找古代微生物生命的迹象。</div>
-                        </div>
-                    </a>
-                    <a class="rin-article-more" target="_blank" href="https://www.nasa.gov/mission_pages/station/main/index.html">
-                        Learn more about our missions...
-                    </a>
-
-                </div>
-
-
-                <div class="rin-card-part" id="works">
-                    <div class="rin-card-title2 mdui-typo"><a href="#works">#</a> 重要成就</div>
-
-                    <a target="_blank" href="https://www.nasa.gov/mission_pages/apollo/apollo.html">
-                        <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 10px;">
-                            <div class="rin-article-title">🌙 阿波罗计划</div>
-                            <div class="rin-article-content">1969年，人类首次登月。阿波罗11号宇航员尼尔·阿姆斯特朗成为第一个踏上月球表面的人。</div>
-                        </div>
-                    </a>
-                    <a target="_blank" href="https://www.nasa.gov/mission_pages/tdam/main/index.html">
-                        <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 5px;">
-                            <div class="rin-article-title">🛸 旅行者号探测器</div>
-                            <div class="rin-article-content">人类制造的最远使者，旅行者1号和2号已经离开太阳系，进入星际空间。</div>
-                        </div>
-                    </a>
-                    <a target="_blank" href="https://www.nasa.gov/mission_pages/hubble/hubble_story.html">
-                        <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 5px;">
-                            <div class="rin-article-title">🔭 哈勃太空望远镜</div>
-                            <div class="rin-article-content">自1990年发射以来，哈勃望远镜彻底改变了我们对宇宙的理解，拍摄了无数令人惊叹的宇宙图像。</div>
-                        </div>
-                    </a>
-                    <a class="rin-article-more" target="_blank" href="https://www.nasa.gov/about/history/index.html">
-                        Explore more achievements...
-                    </a>
-
-                </div>
-
-
-                <div class="rin-tr"></div>
-
-                <div class="rin-card-part" id="last">
-                    <div class="rin-card-title2">NASA @ SpaceExplorer</div>
-                    <div class="rin-card-content">探索未知，激励下一代</div>
-                </div>
-
-                <div class="rin-card-part" id="footer">
-                    <div class="rin-card-content">©2026 NASA Space Explorer | 探索宇宙，追逐星辰 | Background: NASA</div>
-                </div>
-            </div>
-        </div>
+    <!-- 加载动画 -->
+    <div class="loader">
+        <div class="loader-circle"></div>
+        <div class="loader-text">INITIALIZING</div>
     </div>
-</main>
-<script src="/mdui/js/mdui.min.js"></script>
-<script src="/assets/js/main.js"></script>
+
+    <!-- 主内容 -->
+    <main class="hero">
+        <!-- 顶部标志 -->
+        <header class="header">
+            <div class="logo">NASA</div>
+            <nav class="nav">
+                <a href="#missions">MISSIONS</a>
+                <a href="#history">HISTORY</a>
+                <a href="#explore">EXPLORE</a>
+            </nav>
+        </header>
+
+        <!-- 宏大标题区 -->
+        <section class="hero-content">
+            <div class="hero-tagline">National Aeronautics and Space Administration</div>
+            <h1 class="hero-title">
+                <span class="hero-line">TO THE</span>
+                <span class="hero-line hero-line-accent">MOON</span>
+                <span class="hero-line">AND BEYOND</span>
+            </h1>
+            <p class="hero-desc">探索宇宙的无限可能</p>
+            <div class="hero-cta">
+                <a href="https://www.nasa.gov" class="btn btn-primary" target="_blank">开始探索</a>
+            </div>
+        </section>
+
+        <!-- 滚动指示器 -->
+        <div class="scroll-indicator">
+            <span>探索更多</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </main>
+
+    <!-- 任务区域 -->
+    <section id="missions" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">当前任务</h2>
+                <p class="section-subtitle">迈向人类的下一个巨大飞跃</p>
+            </div>
+            
+            <div class="missions-grid">
+                <a href="https://www.nasa.gov/mission_pages/artemis/artemis.html" class="mission-card" target="_blank">
+                    <div class="mission-icon">🌙</div>
+                    <h3 class="mission-title">Artemis</h3>
+                    <p class="mission-desc">重返月球计划，目标是在2025年前将第一位女性和下一位男性宇航员送上月球表面。</p>
+                </a>
+                
+                <a href="https://www.nasa.gov/mission_pages/jameswb/main/index.html" class="mission-card" target="_blank">
+                    <div class="mission-icon">🔭</div>
+                    <h3 class="mission-title">JWST</h3>
+                    <p class="mission-desc">詹姆斯·韦伯太空望远镜，探索宇宙最远处的星系和行星。</p>
+                </a>
+                
+                <a href="https://mars.nasa.gov/mars2020/" class="mission-card" target="_blank">
+                    <div class="mission-icon">🪐</div>
+                    <h3 class="mission-title">Perseverance</h3>
+                    <p class="mission-desc">毅力号火星车正在火星表面寻找生命迹象。</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 历史里程碑 -->
+    <section id="history" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">历史里程碑</h2>
+                <p class="section-subtitle">人类太空探索的伟大时刻</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1958</div>
+                    <div class="timeline-content">
+                        <h4>NASA 成立</h4>
+                        <p>美国国家航空航天局正式成立</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">1969</div>
+                    <div class="timeline-content">
+                        <h4>阿波罗 11 号</h4>
+                        <p>人类首次登月，尼尔·阿姆斯特朗迈出历史性一步</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">1990</div>
+                    <div class="timeline-content">
+                        <h4>哈勃望远镜</h4>
+                        <p>哈勃太空望远镜发射升空，彻底改变了我们对宇宙的理解</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-content">
+                        <h4>韦伯望远镜</h4>
+                        <p>有史以来最大、最强大的太空望远镜成功发射</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据统计 -->
+    <section id="explore" class="section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number" data-target="1958">0</div>
+                    <div class="stat-label">成立年份</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="600">0</div>
+                    <div class="stat-label">次载人任务</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">年火星探索</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="20000">0</div>
+                    <div class="stat-label">名员工</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">NASA</div>
+                <div class="footer-links">
+                    <a href="https://www.nasa.gov" target="_blank">官网</a>
+                    <a href="https://twitter.com/nasa" target="_blank">Twitter</a>
+                    <a href="https://github.com/nasa" target="_blank">GitHub</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 NASA · 探索宇宙，追逐星辰</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/space.js"></script>
 </body>
 </html>
